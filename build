@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+export DOCKER_BUILDKIT=1
+export AZP_URL=https://dev.azure.com/jonathanserafini
+export AZP_TOKEN=$(secret print AZP_TOKEN)
+
+docker build --build-arg AZP_URL=${AZP_URL} --secret id=AZP_TOKEN,env=AZP_TOKEN -t azure:latest .

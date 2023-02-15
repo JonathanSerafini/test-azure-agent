@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+AZP_AGENT_NAME=macbook
+AZP_POOL=Default
+AZP_WORK=_work
+AZP_URL=https://dev.azure.com/jonathanserafini
+AZP_TOKEN=$(secret print AZP_TOKEN)
+
+export AZP_AGENT_NAME AZP_POOL AZP_WORK AZP_URL AZP_TOKEN
+
+docker run \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e AZP_URL -e AZP_TOKEN -e AZP_AGENT_NAME \
+  azure:latest \
+  ${@:-}
